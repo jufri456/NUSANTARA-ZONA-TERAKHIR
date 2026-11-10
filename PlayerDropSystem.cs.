@@ -1,0 +1,28 @@
+
+using UnityEngine;
+
+public class PlayerDropSystem : MonoBehaviour
+{
+    public Transform player;
+    public Transform dropPoint;
+
+    public GameObject plane;
+
+    private bool hasDropped;
+
+    public void DropPlayer()
+    {
+        if (hasDropped || player == null ||
+            dropPoint == null)
+            return;
+
+        player.position = dropPoint.position;
+
+        player.gameObject.SetActive(true);
+
+        if (plane != null)
+            Debug.Log("Pemain terjun dari pesawat!");
+
+        hasDropped = true;
+    }
+}
