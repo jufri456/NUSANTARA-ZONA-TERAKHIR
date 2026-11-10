@@ -1,0 +1,11 @@
+
+using System;
+
+[Serializable]
+public class ShopItem
+{
+    public string itemId;
+    public string itemName;
+    public int price;
+    public string skinId;
+}
