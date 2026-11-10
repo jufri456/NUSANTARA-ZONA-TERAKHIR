@@ -1,0 +1,27 @@
+
+using UnityEngine;
+
+public class MinimapMarker : MonoBehaviour
+{
+    public Transform player;
+    public RectTransform map;
+    public RectTransform marker;
+
+    public float mapWorldSize = 400f;
+
+    void Update()
+    {
+        if (player == null ||
+            map == null ||
+            marker == null)
+            return;
+
+        float x = player.position.x / mapWorldSize;
+        float y = player.position.z / mapWorldSize;
+
+        marker.anchoredPosition = new Vector2(
+            x * map.rect.width,
+            y * map.rect.height
+        );
+    }
+}
