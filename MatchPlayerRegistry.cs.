@@ -1,0 +1,44 @@
+
+using UnityEngine;
+using System.Collections.Generic;
+
+public class MatchPlayerRegistry : MonoBehaviour
+{
+    public List<GameObject> players =
+        new List<GameObject>();
+
+    public int maxPlayers = 100;
+
+    public void AddPlayer(GameObject player)
+    {
+        if (player == null) return;
+
+        if (players.Count >= maxPlayers)
+        {
+            Debug.Log("Pertandingan penuh!");
+            return;
+        }
+
+        if (!players.Contains(player))
+        {
+            players.Add(player);
+            Debug.Log(
+                "Pemain bergabung: " + players.Count
+            );
+        }
+    }
+
+    public void RemovePlayer(GameObject player)
+    {
+        players.Remove(player);
+
+        Debug.Log(
+            "Pemain tersisa: " + players.Count
+        );
+    }
+
+    public int GetPlayerCount()
+    {
+        return players.Count;
+    }
+}
