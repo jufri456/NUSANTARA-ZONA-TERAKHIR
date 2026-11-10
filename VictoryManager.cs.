@@ -1,0 +1,43 @@
+
+using UnityEngine;
+using UnityEngine.UI;
+
+public class VictoryManager : MonoBehaviour
+{
+    public Text victoryText;
+    public GameObject victoryPanel;
+    public GameObject gameOverPanel;
+
+    void Start()
+    {
+        if (victoryPanel != null)
+            victoryPanel.SetActive(false);
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+    }
+
+    public void ShowVictory()
+    {
+        if (victoryPanel != null)
+            victoryPanel.SetActive(true);
+
+        if (victoryText != null)
+            victoryText.text = "BOOYAH! PEMENANG!";
+        
+        Time.timeScale = 0f;
+    }
+
+    public void ShowGameOver()
+    {
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+    public void ReturnToGame()
+    {
+        Time.timeScale = 1f;
+    }
+}
