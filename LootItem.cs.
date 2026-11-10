@@ -1,0 +1,15 @@
+
+using UnityEngine;
+
+public class LootItem : MonoBehaviour
+{
+    public string itemName = "Medkit";
+    public int quantity = 1;
+
+    public void Collect()
+    {
+        Debug.Log("Mengambil: " + itemName);
+
+        Destroy(gameObject);
+    }
+}
