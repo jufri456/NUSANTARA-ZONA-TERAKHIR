@@ -1,0 +1,42 @@
+
+using UnityEngine;
+
+public class MainMenuController : MonoBehaviour
+{
+    public GameObject mainMenu;
+    public GameObject settingsMenu;
+    public GameObject characterMenu;
+    public GameObject lobbyMenu;
+
+    public void PlayGame()
+    {
+        mainMenu.SetActive(false);
+        characterMenu.SetActive(true);
+    }
+
+    public void OpenSettings()
+    {
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+
+    public void OpenLobby()
+    {
+        characterMenu.SetActive(false);
+        lobbyMenu.SetActive(true);
+    }
+
+    public void BackToMenu()
+    {
+        mainMenu.SetActive(true);
+        settingsMenu.SetActive(false);
+        characterMenu.SetActive(false);
+        lobbyMenu.SetActive(false);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("Keluar dari game");
+    }
+}
