@@ -1,0 +1,20 @@
+
+using UnityEngine;
+
+public class MobileControls : MonoBehaviour
+{
+    public ShootingSystem shootingSystem;
+
+    public void FireButton()
+    {
+        if (shootingSystem != null)
+        {
+            shootingSystem.Shoot();
+        }
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Keluar dari game");
+    }
+}
