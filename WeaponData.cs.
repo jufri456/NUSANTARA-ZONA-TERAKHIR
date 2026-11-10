@@ -1,0 +1,29 @@
+
+using UnityEngine;
+
+[System.Serializable]
+public class WeaponData
+{
+    public string weaponName;
+    public float damage;
+    public float fireRate;
+    public float range;
+    public int magazineSize;
+    public int reserveAmmo;
+
+    public WeaponData(
+        string name,
+        float dmg,
+        float rate,
+        float distance,
+        int magazine,
+        int ammo)
+    {
+        weaponName = name;
+        damage = dmg;
+        fireRate = rate;
+        range = distance;
+        magazineSize = magazine;
+        reserveAmmo = ammo;
+    }
+}
