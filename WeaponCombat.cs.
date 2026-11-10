@@ -1,0 +1,71 @@
+
+using UnityEngine;
+
+public class WeaponCombat : MonoBehaviour
+{
+    public Camera playerCamera;
+    public WeaponInventory inventory;
+    public WeaponAmmo ammo;
+
+    private float nextFireTime;
+
+    public void Fire()
+    {
+        if (playerCamera == null ||
+            inventory == null ||
+            ammo == null)
+            return;
+
+        WeaponData weapon = inventory.GetCurrentWeapon();
+
+        if (weapon == null) return;
+
+        if (Time.time < nextFireTime) return;
+
+        if (ammo.currentAmmo <= 0)
+        {
+            Debug.Log("Peluru habis!");
+            return;
+        }
+
+        nextFireTime = Time.time + weapon.fireRate;
+
+        ammo.ShootAmmo();
+
+        Ray ray = playerCamera.ViewportPointToRay(
+            new Vector3(0.5f, 0.5f, 0)
+        );
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, weapon.range))
+        {
+            EnemyHealth enemy =
+                hit.collider.GetComponentInParent<EnemyHealth>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(weapon.damage);
+                Debug.Log("Musuh terkena tembakan!");
+            }
+        }
+    }
+
+    public void Reload()
+    {
+        if (ammo != null)
+            ammo.Reload();
+    }
+
+    public void NextWeapon()
+    {
+        if (inventory != null)
+            inventory.SwitchNextWeapon();
+    }
+
+    public void PreviousWeapon()
+    {
+        if (inventory != null)
+            inventory.SwitchPreviousWeapon();
+    }
+}
