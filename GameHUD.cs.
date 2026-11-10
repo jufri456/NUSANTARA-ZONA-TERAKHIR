@@ -1,0 +1,35 @@
+
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GameHUD : MonoBehaviour
+{
+    public PlayerHealth playerHealth;
+    public WeaponAmmo weaponAmmo;
+
+    public Text healthText;
+    public Text ammoText;
+    public Text statusText;
+
+    void Update()
+    {
+        if (playerHealth != null && healthText != null)
+        {
+            healthText.text =
+                "HP: " + playerHealth.GetHealth().ToString("0");
+        }
+
+        if (weaponAmmo != null && ammoText != null)
+        {
+            ammoText.text =
+                "AMMO: " + weaponAmmo.currentAmmo +
+                " / " + weaponAmmo.reserveAmmo;
+        }
+    }
+
+    public void ShowMessage(string message)
+    {
+        if (statusText != null)
+            statusText.text = message;
+    }
+}
