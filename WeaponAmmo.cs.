@@ -1,0 +1,45 @@
+
+using UnityEngine;
+
+public class WeaponAmmo : MonoBehaviour
+{
+    public int magazineSize = 30;
+    public int currentAmmo = 30;
+    public int reserveAmmo = 120;
+
+    public void ShootAmmo()
+    {
+        if (currentAmmo > 0)
+        {
+            currentAmmo--;
+
+            Debug.Log("Peluru: " + currentAmmo);
+        }
+        else
+        {
+            Debug.Log("PELURU HABIS! RELOAD!");
+        }
+    }
+
+    public void Reload()
+    {
+        if (currentAmmo >= magazineSize)
+            return;
+
+        int needed = magazineSize - currentAmmo;
+
+        int amount = Mathf.Min(
+            needed, reserveAmmo
+        );
+
+        currentAmmo += amount;
+        reserveAmmo -= amount;
+
+        Debug.Log("Reload selesai: " + currentAmmo);
+    }
+
+    public void AddAmmo(int amount)
+    {
+        reserveAmmo += amount;
+    }
+}
