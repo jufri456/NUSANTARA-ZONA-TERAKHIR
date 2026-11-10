@@ -1,0 +1,66 @@
+
+using UnityEngine;
+using System.Collections.Generic;
+
+public class WeaponInventory : MonoBehaviour
+{
+    public List<WeaponData> weapons =
+        new List<WeaponData>();
+
+    public int currentWeaponIndex = 0;
+
+    void Start()
+    {
+        AddWeapon(new WeaponData(
+            "AKM", 30f, 0.12f, 100f, 30, 120
+        ));
+
+        AddWeapon(new WeaponData(
+            "M416", 25f, 0.09f, 120f, 30, 150
+        ));
+
+        AddWeapon(new WeaponData(
+            "SNIPER", 80f, 1f, 300f, 5, 25
+        ));
+    }
+
+    public void AddWeapon(WeaponData weapon)
+    {
+        weapons.Add(weapon);
+        Debug.Log("Senjata didapat: " +
+            weapon.weaponName);
+    }
+
+    public WeaponData GetCurrentWeapon()
+    {
+        if (weapons.Count == 0) return null;
+
+        return weapons[currentWeaponIndex];
+    }
+
+    public void SwitchNextWeapon()
+    {
+        if (weapons.Count == 0) return;
+
+        currentWeaponIndex++;
+
+        if (currentWeaponIndex >= weapons.Count)
+            currentWeaponIndex = 0;
+
+        Debug.Log("Senjata aktif: " +
+            GetCurrentWeapon().weaponName);
+    }
+
+    public void SwitchPreviousWeapon()
+    {
+        if (weapons.Count == 0) return;
+
+        currentWeaponIndex--;
+
+        if (currentWeaponIndex < 0)
+            currentWeaponIndex = weapons.Count - 1;
+
+        Debug.Log("Senjata aktif: " +
+            GetCurrentWeapon().weaponName);
+    }
+}
