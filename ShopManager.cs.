@@ -1,0 +1,45 @@
+
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ShopManager : MonoBehaviour
+{
+    public PlayerWallet wallet;
+    public List<ShopItem> items = new List<ShopItem>();
+
+    public bool BuyItem(int index)
+    {
+        if (wallet == null || index < 0 || index >= items.Count)
+            return false;
+
+        ShopItem item = items[index];
+
+        if (string.IsNullOrEmpty(item.itemId))
+            return false;
+
+        string key = "OWNED_" + item.itemId;
+
+        if (PlayerPrefs.GetInt(key, 0) == 1)
+        {
+            Debug.Log("Item sudah dimiliki!");
+            return false;
+        }
+
+        if (!wallet.SpendCoins(item.price))
+        {
+            Debug.Log("Koin tidak cukup!");
+            return false;
+        }
+
+        PlayerPrefs.SetInt(key, 1);
+        PlayerPrefs.Save();
+
+        Debug.Log("Berhasil membeli: " + item.itemName);
+        return true;
+    }
+
+    public bool IsOwned(string itemId)
+    {
+        return PlayerPrefs.GetInt("OWNED_" + itemId, 0) == 1;
+    }
+}
