@@ -1,0 +1,47 @@
+
+using UnityEngine;
+
+public class LootSpawner : MonoBehaviour
+{
+    public int lootCount = 40;
+    public float mapRadius = 180f;
+
+    void Start()
+    {
+        for (int i = 0; i < lootCount; i++)
+        {
+            SpawnLoot();
+        }
+    }
+
+    void SpawnLoot()
+    {
+        GameObject loot =
+            GameObject.CreatePrimitive(
+                PrimitiveType.Cube
+            );
+
+        loot.name = "Loot Item";
+
+        loot.transform.position = new Vector3(
+            Random.Range(-mapRadius, mapRadius),
+            1f,
+            Random.Range(-mapRadius, mapRadius)
+        );
+
+        loot.transform.localScale =
+            new Vector3(1f, 1f, 1f);
+
+        LootItem item = loot.AddComponent<LootItem>();
+
+        string[] items = {
+            "Medkit",
+            "Ammo",
+            "Rifle",
+            "Armor"
+        };
+
+        item.itemName =
+            items[Random.Range(0, items.Length)];
+    }
+}
