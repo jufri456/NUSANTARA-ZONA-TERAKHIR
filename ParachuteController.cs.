@@ -1,0 +1,67 @@
+
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody))]
+public class ParachuteController : MonoBehaviour
+{
+    public float normalFallSpeed = 20f;
+    public float parachuteFallSpeed = 5f;
+    public float horizontalSpeed = 8f;
+
+    public GameObject parachuteVisual;
+
+    private Rigidbody rb;
+    private bool parachuteOpen;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        if (parachuteVisual != null)
+            parachuteVisual.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OpenParachute();
+        }
+
+        if (parachuteOpen)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+
+            Vector3 direction =
+                transform.forward * vertical +
+                transform.right * horizontal;
+
+            Vector3 velocity = direction * horizontalSpeed;
+
+            velocity.y = -parachuteFallSpeed;
+
+            rb.velocity = velocity;
+        }
+    }
+
+    public void OpenParachute()
+    {
+        if (parachuteOpen) return;
+
+        parachuteOpen = true;
+
+        if (parachuteVisual != null)
+            parachuteVisual.SetActive(true);
+
+        Debug.Log("PARASUT TERBUKA!");
+    }
+
+    public void CloseParachute()
+    {
+        parachuteOpen = false;
+
+        if (parachuteVisual != null)
+            parachuteVisual.SetActive(false);
+    }
+}
