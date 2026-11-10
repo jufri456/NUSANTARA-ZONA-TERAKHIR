@@ -1,0 +1,25 @@
+
+using UnityEngine;
+
+public class MedkitPickup : MonoBehaviour
+{
+    public float healingAmount = 50f;
+
+    void OnTriggerEnter(Collider other)
+    {
+        PlayerHealth health =
+            other.GetComponentInParent<PlayerHealth>();
+
+        if (health != null)
+        {
+            float newHealth =
+                health.GetHealth() + healingAmount;
+
+            health.SetHealth(newHealth);
+
+            Debug.Log("Medkit digunakan!");
+
+            Destroy(gameObject);
+        }
+    }
+}
