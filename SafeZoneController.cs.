@@ -1,0 +1,55 @@
+
+using UnityEngine;
+
+public class SafeZoneController : MonoBehaviour
+{
+    public float startRadius = 200f;
+    public float endRadius = 10f;
+    public float shrinkDuration = 300f;
+
+    public float CurrentRadius { get; private set; }
+
+    private float timer;
+
+    void Start()
+    {
+        CurrentRadius = startRadius;
+    }
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+
+        float progress = Mathf.Clamp01(
+            timer / shrinkDuration
+        );
+
+        CurrentRadius = Mathf.Lerp(
+            startRadius,
+            endRadius,
+            progress
+        );
+
+        transform.localScale = new Vector3(
+            CurrentRadius * 2f,
+            0.1f,
+            CurrentRadius * 2f
+        );
+    }
+
+    public bool IsInsideZone(Vector3 position)
+    {
+        Vector2 playerPosition = new Vector2(
+            position.x, position.z
+        );
+
+        Vector2 center = new Vector2(
+            transform.position.x,
+            transform.position.z
+        );
+
+        return Vector2.Distance(
+            playerPosition, center
+        ) <= CurrentRadius;
+    }
+}
