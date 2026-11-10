@@ -1,0 +1,44 @@
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
+
+public class LobbyManager : MonoBehaviour
+{
+    public string gameSceneName = "GameScene";
+
+    public int maxPlayers = 100;
+
+    public float countdown = 15f;
+
+    private bool matchStarted = false;
+
+    public void StartLobby()
+    {
+        if (!matchStarted)
+        {
+            StartCoroutine(StartCountdown());
+        }
+    }
+
+    IEnumerator StartCountdown()
+    {
+        matchStarted = true;
+
+        float timer = countdown;
+
+        while (timer > 0)
+        {
+            Debug.Log(
+                "Pertandingan dimulai dalam: " +
+                Mathf.CeilToInt(timer)
+            );
+
+            yield return new WaitForSeconds(1f);
+
+            timer--;
+        }
+
+        SceneManager.LoadScene(gameSceneName);
+    }
+}
