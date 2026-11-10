@@ -1,0 +1,28 @@
+
+using UnityEngine;
+
+public class PlayerProfile : MonoBehaviour
+{
+    public string playerName = "Pemain Nusantara";
+    public int playerLevel = 1;
+    public int experience = 0;
+
+    public void AddExperience(int amount)
+    {
+        experience += amount;
+
+        if (experience >= playerLevel * 100)
+        {
+            experience -= playerLevel * 100;
+            playerLevel++;
+
+            Debug.Log("LEVEL NAIK: " + playerLevel);
+        }
+    }
+
+    public void SetPlayerName(string newName)
+    {
+        if (!string.IsNullOrWhiteSpace(newName))
+            playerName = newName;
+    }
+}
