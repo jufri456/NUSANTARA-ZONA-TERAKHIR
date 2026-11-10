@@ -1,0 +1,14 @@
+
+using UnityEngine;
+
+public class KillTracker : MonoBehaviour
+{
+    public int totalKills = 0;
+
+    public void AddKill()
+    {
+        totalKills++;
+
+        Debug.Log("TOTAL KILL: " + totalKills);
+    }
+}
