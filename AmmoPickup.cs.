@@ -1,0 +1,25 @@
+
+using UnityEngine;
+
+public class AmmoPickup : MonoBehaviour
+{
+    public int ammoAmount = 30;
+
+    void OnTriggerEnter(Collider other)
+    {
+        WeaponAmmo ammo =
+            other.GetComponent<WeaponAmmo>();
+
+        if (ammo == null)
+            ammo = other.GetComponentInParent<WeaponAmmo>();
+
+        if (ammo != null)
+        {
+            ammo.AddAmmo(ammoAmount);
+
+            Debug.Log("Peluru berhasil diambil!");
+
+            Destroy(gameObject);
+        }
+    }
+}
