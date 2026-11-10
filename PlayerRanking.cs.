@@ -1,0 +1,44 @@
+
+using UnityEngine;
+using System.Collections.Generic;
+
+[System.Serializable]
+public class RankingEntry
+{
+    public string playerName;
+    public int kills;
+    public int points;
+}
+
+public class PlayerRanking : MonoBehaviour
+{
+    public List<RankingEntry> rankings =
+        new List<RankingEntry>();
+
+    public void AddPlayer(
+        string name, int kills, int points)
+    {
+        RankingEntry entry = new RankingEntry();
+
+        entry.playerName = name;
+        entry.kills = kills;
+        entry.points = points;
+
+        rankings.Add(entry);
+
+        rankings.Sort((a, b) =>
+            b.points.CompareTo(a.points));
+    }
+
+    public void ShowRanking()
+    {
+        for (int i = 0; i < rankings.Count; i++)
+        {
+            Debug.Log(
+                (i + 1) + ". " +
+                rankings[i].playerName +
+                " - " + rankings[i].points + " poin"
+            );
+        }
+    }
+}
