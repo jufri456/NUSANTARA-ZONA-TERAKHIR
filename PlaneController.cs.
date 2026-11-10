@@ -1,0 +1,25 @@
+
+using UnityEngine;
+
+public class PlaneController : MonoBehaviour
+{
+    public float speed = 50f;
+    public float flightTime = 30f;
+
+    private float timer;
+
+    void Update()
+    {
+        transform.Translate(
+            Vector3.forward * speed * Time.deltaTime
+        );
+
+        timer += Time.deltaTime;
+
+        if (timer >= flightTime)
+        {
+            Debug.Log("Pesawat selesai melewati pulau!");
+            enabled = false;
+        }
+    }
+}
