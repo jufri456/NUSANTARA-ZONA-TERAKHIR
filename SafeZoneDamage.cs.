@@ -1,0 +1,41 @@
+
+using UnityEngine;
+
+public class SafeZoneDamage : MonoBehaviour
+{
+    public SafeZoneController safeZone;
+    public float damagePerSecond = 5f;
+
+    private float damageTimer;
+
+    void Update()
+    {
+        if (safeZone == null) return;
+
+        if (!safeZone.IsInsideZone(transform.position))
+        {
+            damageTimer += Time.deltaTime;
+
+            if (damageTimer >= 1f)
+            {
+                PlayerHealth player =
+                    GetComponent<PlayerHealth>();
+
+                EnemyHealth enemy =
+                    GetComponent<EnemyHealth>();
+
+                if (player != null)
+                    player.TakeDamage(damagePerSecond);
+
+                if (enemy != null)
+                    enemy.TakeDamage(damagePerSecond);
+
+                damageTimer = 0f;
+            }
+        }
+        else
+        {
+            damageTimer = 0f;
+        }
+    }
+}
