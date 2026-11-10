@@ -1,0 +1,41 @@
+
+using UnityEngine;
+
+public class MatchStatistics : MonoBehaviour
+{
+    public int kills;
+    public int deaths;
+    public int damageDealt;
+    public int survivalTime;
+
+    private float timer;
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+        survivalTime = Mathf.FloorToInt(timer);
+    }
+
+    public void RecordKill()
+    {
+        kills++;
+    }
+
+    public void RecordDeath()
+    {
+        deaths++;
+    }
+
+    public void RecordDamage(int damage)
+    {
+        damageDealt += damage;
+    }
+
+    public void ShowStatistics()
+    {
+        Debug.Log("KILLS: " + kills);
+        Debug.Log("DEATHS: " + deaths);
+        Debug.Log("DAMAGE: " + damageDealt);
+        Debug.Log("SURVIVAL: " + survivalTime);
+    }
+}
